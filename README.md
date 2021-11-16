@@ -1,7 +1,6 @@
-# mmail
 
 <h2 align="center">
-<a href="https://maocommunity.blogspot.com/?m=1">TBOMB_MAO</a>
+<a href="https://maocommunity.blogspot.com/?m=1">M_MAIL</a>
   
   </h2>
 </br>
