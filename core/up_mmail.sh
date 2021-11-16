@@ -29,7 +29,7 @@ update(){
   xdg-open https://www.facebook.com/mao2116/
   echo -e "${b} PLEASE WAIT..." 
   cd ; 
-  rm -rf mail ; 
+  rm -rf mmail ; 
   apt update ; 
   apt install python -y ; 
   apt install git -y ; 
@@ -45,7 +45,7 @@ update(){
   echo
   echo -e "${g}<==> NOW TYPE <==>"
   echo
-  echo -e "${b} cd ; cd tbomb_mao ; python tbomb_mao.py${n}" ;
+  echo -e "${b} cd ; cd mmail ; python mmail.py${n}" ;
   sleep 3
 
 
