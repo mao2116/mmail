@@ -1,5 +1,10 @@
 from core.headers import *
 from core.logo import *
+import os
+try:
+  import requests
+except:
+  os.system("pip install requests")
 import json, requests ,os, random, time, sys
 from requests import post as rp
 rs=requests.session()
