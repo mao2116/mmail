@@ -21,7 +21,11 @@
 <a href="https://www.facebook.com/mAoVirUs2116/">
   <img width="50px" height="50px" src="https://raw.githubusercontent.com/fh-rabbi/Hack-Box/main/images/fb.png"><!I JUST USE A PIC FROM FH-RABBI >
 </a>
-</p>  
+</p> 
+
+ 
+### IF YOU WANNA COPY THIS TOOL OR MODIFY THIS TOOL THEN GIVE ME CREADUTS!
+
 
 ## THIS TOOL MADE FOR USE TEMPMAIL WITH TERMINAL !
 ## FEATURES ~~~
@@ -32,6 +36,11 @@
 * `YOU CAN CREAT EMAIL RAMDOMLY AND COUSTOMLY`
 * `YOU CAN SEE YOUR MAILBOX IN TERMINAL`
 * `AUTO UPDATE FEATURE ADDED`
+
+## REQUIREMENTS
+* `PYTHON`
+* `GIT`
+* `REQUESTS`
 
 
 ## INSTALLATION [ ] :
