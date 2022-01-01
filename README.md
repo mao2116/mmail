@@ -1,98 +1,49 @@
+# MAO _ MAIL
+**A SIMPLE TOOL KIT FOR MAKE TEMPMAIL IN TERMINAL..**
 
-<h2 align="center">
-<a href="https://maocommunity.blogspot.com/?m=1">M_MAIL</a>
-  
-  </h2>
-</br>
-<b><i>MMAIL MEANS MAO MAIL. YOU CAN CREAT EASYLY TEMPMAIL WITH THIS TOOL.WE JUST TRY TO MAKE THIS TOOL USER FREANDLY! </i></b>
-</br>
-<p align="center">
-<b> AUTHER </b>
-</p>
- <p align="center">
+[![Author](https://img.shields.io/badge/Author-MAO2116-blue)](https://github.com/mao2116)
+[![Language](https://img.shields.io/badge/Written%20in-Python3-blue)](#)
+[![Opensource](https://img.shields.io/badge/Open%20Source-Yes-green)](#)
+
+**TRY TO MAKE EASYER,THE MAIN AUTHER OF THIS CODE MAO2116**
+
+#### REQUIREMENTS
+* `PYTHON 3.9.X+`
+* `REQUESTS`
+### Installation :
+
+```
+apt update -y
+
+apt install python -y
+
+apt install git -y
+
+pip install requests
+
+git clone https://github.com/mao2116/mmail
+
+```
+
+<br><a href="#"><img src="https://raw.githubusercontent.com/mao2116/test/main/BLOG/PIC/IMG_20220101_130140.jpg"></a><br>
+
+### FOR RUN :
+
+```
+cd piclogo
+
+python mmail.py
+
+```
+
+<b>Copyright (c) 2021 MAO-COMMUNITY Under <a href="https://raw.githubusercontent.com/mao2116/piclogo/main/LICENSE">MIT LICENSE</a></b>
+
+<div align="center">
+<b> GET US IN CLICK </b><br><br>
 <a href="https://github.com/mao2116">
   <img width="50px" height="50px" src="https://raw.githubusercontent.com/fh-rabbi/Hack-Box/main/images/git.png">
 </a>
-</p>
-  <p align="center">
-  <b> TO REPORT ANY TYPE OF BUG OR PROBLEM </b>
-<p/>
-<p align="center">
 <a href="https://www.facebook.com/mao2116/">
   <img width="50px" height="50px" src="https://raw.githubusercontent.com/fh-rabbi/Hack-Box/main/images/fb.png"><!I JUST USE A PIC FROM FH-RABBI >
 </a>
-</p> 
-
- 
-### IF YOU WANNA COPY THIS TOOL OR MODIFY THIS TOOL THEN GIVE ME CREADUTS!
-
-
-## THIS TOOL MADE FOR USE TEMPMAIL WITH TERMINAL !
-## FEATURES ~~~
-
-
-* `YOU CAN CREAT TEMPMAIL WITHIN 10 SEC`
-* `YOU CAN LOG IN YOUR PREVIOUS EMAILS `
-* `YOU CAN CREAT EMAIL RAMDOMLY AND COUSTOMLY`
-* `YOU CAN SEE YOUR MAILBOX IN TERMINAL`
-* `AUTO UPDATE FEATURE ADDED`
-
-## REQUIREMENTS
-* `PYTHON`
-* `GIT`
-* `REQUESTS`
-
-
-## INSTALLATION [ ] :
-
-* `apt-get update -y`
-* `pkg install git -y`
-* `pkg install python -y`
-* `pip install requests`
-* `git clone https://github.com/mao2116/mmail`
-* `ls`
-
-## ONE CLICK INSTALLATION :
-
-
-* `apt update ; apt install python -y ; apt install git -y ; pip install requests ; git clone https://github.com/mao2116/mmail`
-
-
-## FOR UPDATE TOOL ():
-
-* `cd ; rm -rf mmail ; apt update ; apt install python -y ; apt install git -y ; pip install requests ; git clone https://github.com/mao2116/mmail/ ;`
-
-## FOR RUN THIS TOOL :
-
-***OPEN TERMINAL AND TYPE:***
-
-* `cd mmail`
-
-* `python mmail.py`
-
-</br>
-<h3>[ ! ] TASTED ON TERMUX [ ! ]
-</br>
- 
-<h3/>
-
-
-<b>
-
-</br>
-</br>
-<p align="center">
-<a href="https://www.facebook.com/mAoVirUs2116/">
-  <img width="50px" height="50px" src="https://raw.githubusercontent.com/fh-rabbi/Hack-Box/main/images/fb.png"><!I JUST USE A PIC FROM FH-RABBI >
-<a/>
-<p/>  
-
-</b>
-<b> mao2116 </b>
-
-## WARNING : 
-***This tool is only for educational purpose. If you use this tool for other purposes except education we will not be responsible in such cases.***
-
-  
-  
-  
+</div>  
