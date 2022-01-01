@@ -5,7 +5,7 @@
 [![Language](https://img.shields.io/badge/Written%20in-Python3-blue)](#)
 [![Opensource](https://img.shields.io/badge/Open%20Source-Yes-green)](#)
 
-**TRY TO MAKE EASYER,THE MAIN AUTHER OF THIS CODE MAO2116**
+**THE MAIN AUTHOR OF THIS CODE MAO2116**
 
 #### REQUIREMENTS
 * `PYTHON 3.9.X+`
@@ -36,7 +36,7 @@ python mmail.py
 
 ```
 
-<b>Copyright (c) 2021 MAO-COMMUNITY Under <a href="https://raw.githubusercontent.com/mao2116/piclogo/main/LICENSE">MIT LICENSE</a></b>
+<b>Copyright (c) 2021 MAO-COMMUNITY Under <a href="https://raw.githubusercontent.com/mao2116/mmail/main/LICENSE">MIT LICENSE</a></b>
 
 <div align="center">
 <b> GET US IN CLICK </b><br><br>
