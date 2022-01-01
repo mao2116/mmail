@@ -30,7 +30,7 @@ git clone https://github.com/mao2116/mmail
 ### FOR RUN :
 
 ```
-cd piclogo
+cd mmail
 
 python mmail.py
 
