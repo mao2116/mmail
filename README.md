@@ -1,5 +1,5 @@
 # MAO _ MAIL
-**A SIMPLE TOOL KIT FOR MAKE TEMPMAIL IN TERMINAL..**
+**A SIMPLE TOOL KIT FOR MAKE TEMPMAIL WITH TERMINAL.**
 
 [![Author](https://img.shields.io/badge/Author-MAO2116-blue)](https://github.com/mao2116)
 [![Language](https://img.shields.io/badge/Written%20in-Python3-blue)](#)
