@@ -40,7 +40,7 @@ rs=requests.session()
 rg=rs.get
 maomailex=""
 mailmes=""
-currenteversion="v1.0"
+currenteversion="v1.1"
 def logop(z):
   for word in z + '\n':
      sys.stdout.write(word)
