@@ -1,27 +1,6 @@
-#mao2116
-"""MIT License
-
-Copyright (c) 2021 MAO-COMMUNITY
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE."""
-
-
+#MAO2116
+#coding/bin/python3
+#coding=utf-8
 from core.headers import *
 from core.logo import *
 import os
@@ -40,33 +19,14 @@ def logop(z):
   for word in z + '\n':
      sys.stdout.write(word)
      sys.stdout.flush()
-     time.sleep(0.1)
+     time.sleep(0.01)
 def maogit():
   os.system("xdg-open https://github.com/mao2116/")
-def inboxlogo(currentemail):
-  inboxlogo_="""
-{acl} __  __  {ycl} __  __    _    ___ _
-{acl}|  \/  | {ycl}|  \/  |  / \  |_ _| |
-{acl}| |\/| | {ycl}| |\/| | / _ \  | || |
-{acl}| |  | | {ycl}| |  | |/ ___ \ | || |___
-{acl}|_|  |_| {ycl}|_|  |_/_/   \_\___|_____|{ncl}
-        
-        {acl}[ {bcl}CODER {acl}] {pcl}MAO2116
-        {acl}[ {bcl}GITHUB {acl}]{pcl} MAO2116    
-        {acl}[ {bcl}THANKS TO {acl}]{pcl} ALLAH
-        
-{acl}[{bcl} PRESS{gcl} CTRL+C {acl}]{ycl} TO OPEN MAIN MANU   
-
-{acl}[ {gcl}CURRENT{acl}_{mcl}MAIL {acl}] {ycl}{currentemail}
-
-        {acl}[{gcl} !{acl} ] {rcl}INBOX {acl}[{gcl} !{acl} ]{ncl}
-""".format(mcl=mcl,acl=acl,ncl=ncl,pcl=pcl,ycl=ycl,bcl=bcl,gcl=gcl,rcl=rcl,currentemail=currentemail)
-  print(inboxlogo_)
 def ext():
-  exit(f"\n{acl}[{rcl} !{acl} ] {gcl}THANKS FOR USING {acl}[{rcl} !{acl} ]\n")
+  exit("\n{acl}[{rcl} !{acl} ] {gcl}THANKS FOR USING {acl}[{rcl} !{acl} ]\n".format(acl=acl,rcl=rcl,gcl=gcl))
 def viewmail():
-  if os.path.exists("domain.txt"):
-    with open("domain.txt","r") as cmmail:
+  if os.path.exists("core/domain.txt"):
+    with open("core/domain.txt","r") as cmmail:
       cmmail = cmmail.read()
     print(f"{acl}>>>{bcl} CUREENT _ MAIL{acl} :{ycl} {cmmail}")  
     x_X=input(f"\n\n{ycl} BACK MAIN MANU {acl}[{gcl}y{ncl}/{rcl}n{acl}] {acl}:{bcl} ")
@@ -98,7 +58,7 @@ def coustomnewdomains():
     domaincon=(json.loads(domainr.text))["email"]==emailcoustom
     mailtoken=(json.loads(domainr.text))["token"]
     if domaincon:
-      print(f"{acl}[{gcl} !{acl} ] {ycl}SUCCESSFULLY CREATE A NEW EMAIL {acl}[{gcl} !{acl} ]")
+      logop(f"{acl}[{gcl} !{acl} ] {ycl}SUCCESSFULLY CREATE A NEW EMAIL {acl}[{gcl} !{acl} ]")
       logop("{acl}[{gcl} !{acl} ]{gcl} CREATED EMAIL {acl}:{ycl} {newemail}".format(newemail=(json.loads(domainr.text))["email"],acl=acl,gcl=gcl,ycl=ycl))
 
     with open("all_domain.json","r+") as alldr:
@@ -109,11 +69,13 @@ def coustomnewdomains():
      
     with open("all_domain.json","w") as alldr:
       alldr.write(str(addingmail))
-    with open("domain.txt","w") as currend:
+    with open("core/domain.txt","w") as currend:
       currend.write(emailcoustom)
     inboxchkdef()  
   else:
-    print("{acl}[{rcl} !{acl} ]{rcl} SELECTED DOMAIN NOT FOUNDED {acl}[{rcl} !{acl} ]")
+    print(f"{acl}[{rcl} !{acl} ]{rcl} SELECTED DOMAIN NOT FOUNDED {acl}[{rcl} !{acl} ]")
+    
+    coustomnewdomains()
 def seemail():
   with open("all_domain.json","r") as read:
     read=(json.loads(read.read()))["domains"]
@@ -149,7 +111,7 @@ def historylog():
 }
     login=(json.loads(rp(url,json=jsonmao,headers=header).text))["email"]
     
-    with open("domain.txt","w") as currend:
+    with open("core/domain.txt","w") as currend:
       currend.write(login)
       currend.close()
   
@@ -184,9 +146,11 @@ def randomemail():
   with open("all_domain.json","w") as alldr:
       alldr.write(str(addingmail))
       alldr.close()
-  with open("domain.txt","w") as currend:
+  with open("core/domain.txt","w") as currend:
       currend.write(randommail)
       currend.close()
+  logop(f"{acl}[{gcl} !{acl} ] {ycl}SUCCESSFULLY CREATE A NEW EMAIL {acl}[{gcl} !{acl} ]")
+  logop("{acl}[{gcl} !{acl} ]{gcl} CREATED EMAIL {acl}:{ycl} {newemail}".format(newemail=randommail,acl=acl,gcl=gcl,ycl=ycl))    
   inboxchkdef()
   
   
@@ -198,10 +162,10 @@ def filchk(mao):
 def inboxchkdef():
   os.system("clear")
   
-  with open("mailchk.mao","w") as faka:
+  with open("core/mailchk.mao","w") as faka:
     faka.write(" ")
     faka.close()
-  with open("domain.txt","r") as currentemail:
+  with open("core/domain.txt","r") as currentemail:
     currentemail=currentemail.read()
     
   currentemail=currentemail
@@ -210,7 +174,7 @@ def inboxchkdef():
 
   while True:
     try:
-      with open("mailchk.mao","r") as maochk:  
+      with open("core/mailchk.mao","r") as maochk:  
         defaultbox=maochk.read()
         maochk.close()
       time.sleep(1.5)
@@ -225,16 +189,15 @@ def inboxchkdef():
         elif inboxget1.status_code==400:
           inboxget["message"]
           if inboxget["message"]=="Email not found":
-            mailmes=f"{acl}[{rcl} !{acl} ] {ycl}YOUR MAIL IS EXPIRED {acl}[{rcl} !{acl} ]"
             os.system("clear;")
-            print(mailmes)
+            print("{acl}[{rcl} !{acl} ] {ycl}YOUR MAIL IS EXPIRED {acl}[{rcl} !{acl} ]".format(acl=acl,rcl=rcl,ycl=ycl))
             time.sleep(2)
             main2()
             break
           else:
             exit(inboxget["message"])
         else:
-          with open("mailchk.mao","w") as maochk:
+          with open("core/mailchk.mao","w") as maochk:
             
             inboxget=json.loads((inboxget1).text)
             maochk.write(str(inboxget))
@@ -242,13 +205,31 @@ def inboxchkdef():
             if emailtext==[]:
               pass
             else:
-             
+              if ((1+filse))==1:
+                os.system("clear")
+                inboxlogo(currentemail)
+              else:  
+                pass
+              
               print(f"{acl}----------{ycl} INBOX {acl}-----------\n")
               logop("{acl}>>>>   {gcl}EMAIL : {ycl}{filse}\n\n".format(filse=(1+filse), acl=acl,gcl=gcl,ycl=ycl))
-              print("{acl}>>> {gcl}FROM {acl}:{ycl} {From}\n".format(From=emailtext['from'],gcl=gcl,acl=acl,ycl=ycl))
+              if "<" in emailtext['from']:
+                fromf_ck=emailtext['from']
+                f_cky=fromf_ck.replace(" <"," • ")
+                f_cky=f_cky.replace(">", "")
+                if '"' in f_cky:
+                  f_cky=f_cky.replace('"','')
+                else:
+                  pass
+              else:
+                f_cky=emailtext['from']
+              print("{acl}>>> {gcl}FROM {acl}:{ycl} {From}\n".format(From=f_cky,gcl=gcl,acl=acl,ycl=ycl))
               
               print("{acl}>>> {gcl}TO{acl} :{ycl} {To}".format(To=emailtext["to"],acl=acl,gcl=gcl,ycl=ycl))
-              print("{acl}>>> {gcl}CC {acl}: {rcl}{cc}".format(cc=emailtext["cc"],acl=acl,gcl=gcl,rcl=rcl))
+              if str(emailtext["cc"])== "None":
+                pass
+              else:
+                print("{acl}>>> {gcl}CC {acl}: {rcl}{cc}".format(cc=emailtext["cc"],acl=acl,gcl=gcl,rcl=rcl))
               print("{acl}>>> {gcl}SUBJECT{acl} :{ycl} {subject}" .format(subject=emailtext["subject"],acl=acl,gcl=gcl,ycl=ycl))
               print("\n{acl}>>> \033[1;0mBODY : {body}".format(body=emailtext["body_text"],acl=acl))
               if emailtext["attachments"] == []:
@@ -256,10 +237,20 @@ def inboxchkdef():
               else:
                 for num,ia in enumerate(emailtext["attachments"]):
                   print("\n{acl}>>>{gcl} ATTACHMENT NO. {acl}:{ycl} {ia}\n".format(ia=num+1,acl=acl,gcl=gcl,ycl=ycl))
-                  print(f"{acl}>>>{gcl} VIEW ATTACHMENT {acl}:{ycl} https://api.internal.temp-mail.io:443/api/v3/attachment/"+(str(ia["id"]))+"?preview=1\n")
-                  print(f"{acl}>>>{gcl} DOWNLOAD ATTACHMENT{acl} :{ycl} https://api.internal.temp-mail.io:443/api/v3/attachment/"+(str(ia["id"]))+"?download=1\n")
+                  print(f"{acl}>>>{gcl} VIEW ATTACHMENT {acl}:{ycl} https://api.internal.temp-mail.io/api/v3/attachment/"+(str(ia["id"]))+"?preview=1\n")
+                  print(f"{acl}>>>{gcl} DOWNLOAD ATTACHMENT{acl} :{ycl} https://api.internal.temp-mail.io/api/v3/attachment/"+(str(ia["id"]))+"?download=1\n")
                   print(f"{acl}>>>{gcl} ATTACHMENT NAME {acl}:{ycl}"+(str(ia["name"]))+"\n")
-                  print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+(str(ia["size"]))+f"{bcl} BYTES\n")
+                  if 1048576<=int(ia["size"]):
+                    mathsize=str((int(ia["size"]))/1048576)
+                    sizeofia=mathsize[:4]
+                    print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(sizeofia)+f"{bcl} M.B.\n")
+                  elif 1048576>=int(ia["size"]) and 1024<=int(ia["size"]):
+                    mathsize=str((int(ia["size"]))/1024)
+                    sizeofia=mathsize[:4]
+                    print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(sizeofia)+f"{bcl} K.B.\n")
+                  
+                  else:
+                    print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(ia["size"])+f"{bcl} BYTES\n")
                   
     except Exception as mao:
       exit(mao)
@@ -267,7 +258,7 @@ def inboxchkdef():
       main2()
       break
 def more():
-  logo=f"""
+  logo="""
   
   {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
   {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
@@ -276,12 +267,12 @@ def more():
   {acl}[{gcl} 5{bcl}.{acl} ]{ycl} EMAILS HISTORY {acl}[ {bcl}YOU CAN LOG IN {acl}]
   {acl}[{gcl} 6{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
   {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT {acl}[{bcl} ×××{acl} ]
-  """
+  """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
   while True:
     os.system("clear")
     print(manuhome)
     print(logo)
-    manuin=input(f"{acl}>>>{ycl} ")
+    manuin=input(f"{acl}  ~~~>>>{ycl} ")
     if manuin=="1":
       randomemail()
       break
@@ -306,21 +297,23 @@ def more():
     else:
       print("[ ! ] INVALID SELECTION [ ! ]")
       time.sleep(2)
-def main2():
-  logo=f"""
+def more2():
+  logo="""
   
   {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
   {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
-  {acl}[{gcl} 3{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
-  {acl}[{gcl} 4{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
-  {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
-  """
+  {acl}[{gcl} 3{bcl}.{acl} ]{ycl} INBOX CHECK{acl} [{bcl} ALL MAILS {acl}]
+  {acl}[{gcl} 4{bcl}.{acl} ]{ycl} SEE ALL EMAIL {acl}[{bcl} YOU CREATED {acl}]
+  {acl}[{gcl} 5{bcl}.{acl} ]{ycl} VIEW CUREENT MAIL {acl}[ {ccl}ALL MAILS {acl}]
+  {acl}[{gcl} 6{bcl}.{acl} ]{ycl} EMAILS HISTORY {acl}[ {bcl}YOU CAN LOG IN {acl}]
+  {acl}[{gcl} 7{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
+  {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT {acl}[{bcl} ×××{acl} ]
+  """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
   while True:
-    
     os.system("clear")
     print(manuhome)
     print(logo)
-    manuin=input(f"{acl}>>>{ycl} ")
+    manuin=input(f"{acl}  ~~~>>>{ycl} ")
     if manuin=="1":
       randomemail()
       break
@@ -328,35 +321,82 @@ def main2():
       coustomnewdomains()
       break
     elif manuin=="3":
-      more()
+      inboxchkdef()
       break
     elif manuin =="4":
+      seemail()
+      break
+    elif manuin =="5":
+      viewmail()
+      break
+    elif manuin=="6":
+      historylog()
+      break
+    elif manuin=="7":
       maogit()
       break
     elif manuin=="0":
       ext()
       break
     else:
-      print(f"{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]")
+      print("[ ! ] INVALID SELECTION [ ! ]")
+      time.sleep(2)      
+def main2():
+  logo="""
+  
+  {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
+  {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
+  {acl}[{gcl} 3{bcl}.{acl} ]{ycl} INBOX CHECK{acl} [{bcl} ALL MAILS {acl}]
+  {acl}[{gcl} 4{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
+  {acl}[{gcl} 5{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
+  {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
+  """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
+  while True:
+    
+    os.system("clear")
+    print(manuhome)
+    print(logo)
+    manuin=input(f"{acl}  ~~~>>>{ycl} ")
+    if manuin=="1":
+      randomemail()
+      break
+    elif manuin=="2":
+      coustomnewdomains()
+      break
+    elif manuin=="3":
+      inboxchkdef()
+      break
+    elif manuin=="4":
+      more2()
+      break
+    elif manuin =="5":
+      maogit()
+      break
+    elif manuin=="0":
+      ext()
+      break
+    else:
+      print("{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]".format(acl=acl,rcl=rcl))
       time.sleep(2)
+      
 def main():
-  logo=f"""
+  logo="""
   
   {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
   {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
   {acl}[{gcl} 3{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
   {acl}[{gcl} 4{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
   {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
-  """
+  """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
   while True:
-    if filchk("domain.txt"):
+    if filchk("core/domain.txt"):
       inboxchkdef()
       break
     else:
       os.system("clear")
       print(manuhome)
       print(logo)
-      manuin=input(f"{acl}>>>{ycl} ")
+      manuin=input(f"{acl}  ~~~>>>{ycl} ")
       if manuin=="1":
         randomemail()
         break
@@ -367,26 +407,34 @@ def main():
         more()
         break
       elif manuin=="4":
+        maogit()
         break
       elif manuin=="0":
         ext()
       else:
-        print(f"{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]")
+        print("{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]".format(acl=acl,rcl=rcl))
         time.sleep(2)
-def __init__():
-  os.system("clear")
-  print(loginpromt)
-  x=json.loads(rg("https://raw.githubusercontent.com/mao2116/test/main/testpy/mao.json",headers=headergit).text)
-  if x["condition"] == "on":
-    if x["version"]==currenteversion:
-      if x["api"] == "running":
-        main()
-      else:
-        exit("[ ! ] API DOWN [ ! ]")
-    else:
-      os.system("bash core/up_mmail.sh")
-  else:
-    exit("[ ! ] TOOL IS OFF [ ! ]")
         
-#main()
+        
+        
+        
+        
+def __init__():
+  try:
+    os.system("clear")
+    print(loginpromt)
+    x=json.loads(rg("https://raw.githubusercontent.com/mao2116/test/main/testpy/mao.json",headers=headergit).text)
+    if x["condition"] == "on":
+      if x["version"]==currenteversion:
+        if x["api"] == "running":
+          main()
+        else:
+          exit("[ ! ] API DOWN [ ! ]")
+      else:
+        os.system("bash core/up_mmail.sh")
+    else:
+      exit("[ ! ] TOOL IS OFF [ ! ]")
+  except Exception as mm:
+    exit(mm)
+
 __init__()
