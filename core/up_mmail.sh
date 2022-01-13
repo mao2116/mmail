@@ -31,7 +31,7 @@ update(){
   cd ; 
   rm -rf mmail ; 
   apt update ; 
-  apt install python -y ; 
+  apt install python3 -y ; 
   apt install git -y ; 
   pip install requests ; 
   git clone https://github.com/mao2116/mmail
