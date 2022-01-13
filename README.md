@@ -1,4 +1,7 @@
-# MAO _ MAIL
+<h2 align="center"> MAO _ MAIL </h2>
+<h3>VERSION : 1.1 </h3>
+
+
 **A SIMPLE TOOL KIT FOR MAKE TEMPMAIL WITH TERMINAL.**
 
 [![Author](https://img.shields.io/badge/Author-MAO2116-blue)](https://github.com/mao2116)
