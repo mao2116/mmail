@@ -18,7 +18,7 @@ wcl='\033[1;37m'
 mcl = '\033[1;94m'
 ncl='\033[0;00m'
 loginpromt="""
-{acl} __  _V1.1{ycl}__  __    _    ___ _
+{acl} __  _V1.2{ycl}__  __    _    ___ _
 {acl}|  \/  | {ycl}|  \/  |  / \  |_ _| |
 {acl}| |\/| | {ycl}| |\/| | / _ \  | || |
 {acl}| |  | | {ycl}| |  | |/ ___ \ | || |___
@@ -31,7 +31,7 @@ loginpromt="""
         {acl}[{gcl} !{acl} ] {rcl}ANALYSING  DATA{acl}[{gcl} !{acl} ]{ncl}
 """.format(acl=acl,ncl=ncl,pcl=pcl,ycl=ycl,bcl=bcl,gcl=gcl,rcl=rcl)
 manuhome="""
-{acl} __  __V1.1{ycl}_  __    _    ___ _
+{acl} __  __V1.2{ycl}_  __    _    ___ _
 {acl}|  \/  | {ycl}|  \/  |  / \  |_ _| |
 {acl}| |\/| | {ycl}| |\/| | / _ \  | || |
 {acl}| |  | | {ycl}| |  | |/ ___ \ | || |___
@@ -45,7 +45,7 @@ manuhome="""
 """.format(acl=acl,ncl=ncl,pcl=pcl,ycl=ycl,bcl=bcl,gcl=gcl,rcl=rcl)
 def inboxlogo(currentemail):
   inboxlogo_="""
-{acl} __  _V1.1{ycl}__  __    _    ___ _
+{acl} __  _V1.2{ycl}__  __    _    ___ _
 {acl}|  \/  | {ycl}|  \/  |  / \  |_ _| |
 {acl}| |\/| | {ycl}| |\/| | / _ \  | || |
 {acl}| |  | | {ycl}| |  | |/ ___ \ | || |___
