@@ -1,32 +1,6 @@
 #MAO2116
 #coding/bin/python3
 #coding=utf-8
-
-"""
-MIT License
-
-Copyright (c) 2021 MAO-COMMUNITY
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-"""
-
 from core.headers import *
 from core.logo import *
 import os
@@ -40,7 +14,7 @@ rs=requests.session()
 rg=rs.get
 maomailex=""
 mailmes=""
-currenteversion="v1.1"
+currenteversion="v1.2"
 def logop(z):
   for word in z + '\n':
      sys.stdout.write(word)
@@ -122,8 +96,10 @@ def historylog():
   print(manuhome)
   for num , mail in enumerate(read):
     print("{acl}[ {gcl}{mao} {acl}] {ycl}".format(mao=num+1,acl=acl,gcl=gcl,ycl=ycl)+mail["email"])
+  print(f"{acl}[{rcl} 0. {acl}]{pcl} BACK MAIN MANU {acl}[ {gcl}../{acl} ]")  
   in__=int(input(f"\n{bcl}>>>> {ycl}"))
-  if num+1 >= in__:
+  if num+1 >= in__ and in__ != 0:
+    
     index=(in__-1)
     historymail=read[index]
     number=(int((len(historymail["email"]))))-(int(historymail["digit"]))
@@ -147,6 +123,9 @@ def historylog():
     else:
       logop("{acl}[{rcl} !{acl} ] { gcl}YOUR MAIL{ycl} : {log}".format(log=login,acl=acl,rcl=rcl,ycl=ycl,gcl=gcl))
       exit()
+  elif  in__==0:
+    #break
+    main2()
 
 def makedic(mail,token,digit):
   dic="{\"email\":\""+mail+"\",\"token\":\""+token+"\",\"digit\":\""+digit+"\"}"
@@ -191,6 +170,9 @@ def inboxchkdef():
   with open("core/mailchk.mao","w") as faka:
     faka.write(" ")
     faka.close()
+  with open('core/maocount.mao','w') as maocount:
+    maocount.write("0")
+    maocount.close()
   with open("core/domain.txt","r") as currentemail:
     currentemail=currentemail.read()
     
@@ -227,57 +209,84 @@ def inboxchkdef():
             
             inboxget=json.loads((inboxget1).text)
             maochk.write(str(inboxget))
+         
           for filse,emailtext in enumerate(inboxget):
             if emailtext==[]:
               pass
             else:
-              if ((1+filse))==1:
-                os.system("clear")
-                inboxlogo(currentemail)
-              else:  
-                pass
-              
-              print(f"{acl}----------{ycl} INBOX {acl}-----------\n")
-              logop("{acl}>>>>   {gcl}EMAIL : {ycl}{filse}\n\n".format(filse=(1+filse), acl=acl,gcl=gcl,ycl=ycl))
-              if "<" in emailtext['from']:
-                fromf_ck=emailtext['from']
-                f_cky=fromf_ck.replace(" <"," • ")
-                f_cky=f_cky.replace(">", "")
-                if '"' in f_cky:
-                  f_cky=f_cky.replace('"','')
+        
+              if int(open('core/maocount.mao','r').read()) <filse+1:
+                
+                with open('core/maocount.mao','w') as maocount:
+                  
+                  maocount.write(str(filse+1))
+                  maocount.close()
+                
+                logop(f"{acl}----------{ycl} INBOX {acl}-----------\n")
+                logop("{acl}>>>>   {gcl}EMAIL : {ycl}{filse}\n".format(filse=(1+filse), acl=acl,gcl=gcl,ycl=ycl))
+                if 'T' in emailtext["created_at"]:
+                  timecr=emailtext["created_at"].replace("T","mao")
+                  maotime=timecr.split("mao")
+                 
                 else:
-                  pass
-              else:
-                f_cky=emailtext['from']
-              print("{acl}>>> {gcl}FROM {acl}:{ycl} {From}\n".format(From=f_cky,gcl=gcl,acl=acl,ycl=ycl))
-              
-              print("{acl}>>> {gcl}TO{acl} :{ycl} {To}".format(To=emailtext["to"],acl=acl,gcl=gcl,ycl=ycl))
-              if str(emailtext["cc"])== "None":
-                pass
-              else:
-                print("{acl}>>> {gcl}CC {acl}: {rcl}{cc}".format(cc=emailtext["cc"],acl=acl,gcl=gcl,rcl=rcl))
-              print("{acl}>>> {gcl}SUBJECT{acl} :{ycl} {subject}" .format(subject=emailtext["subject"],acl=acl,gcl=gcl,ycl=ycl))
-              print("\n{acl}>>> \033[1;0mBODY : {body}".format(body=emailtext["body_text"],acl=acl))
-              if emailtext["attachments"] == []:
-                pass
-              else:
-                for num,ia in enumerate(emailtext["attachments"]):
-                  print("\n{acl}>>>{gcl} ATTACHMENT NO. {acl}:{ycl} {ia}\n".format(ia=num+1,acl=acl,gcl=gcl,ycl=ycl))
-                  print(f"{acl}>>>{gcl} VIEW ATTACHMENT {acl}:{ycl} https://api.internal.temp-mail.io/api/v3/attachment/"+(str(ia["id"]))+"?preview=1\n")
-                  print(f"{acl}>>>{gcl} DOWNLOAD ATTACHMENT{acl} :{ycl} https://api.internal.temp-mail.io/api/v3/attachment/"+(str(ia["id"]))+"?download=1\n")
-                  print(f"{acl}>>>{gcl} ATTACHMENT NAME {acl}:{ycl}"+(str(ia["name"]))+"\n")
-                  if 1048576<=int(ia["size"]):
-                    mathsize=str((int(ia["size"]))/1048576)
-                    sizeofia=mathsize[:4]
-                    print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(sizeofia)+f"{bcl} M.B.\n")
-                  elif 1048576>=int(ia["size"]) and 1024<=int(ia["size"]):
-                    mathsize=str((int(ia["size"]))/1024)
-                    sizeofia=mathsize[:4]
-                    print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(sizeofia)+f"{bcl} K.B.\n")
-                  
+                  timecr=emailtext["created_at"]
+                for num,i in enumerate(maotime):
+                  if num==0:
+                    date=i
+                  elif num == 1:
+                    timecr=i.split(":")
+                    for num,timeing in enumerate(timecr):
+                      if num==0:
+                        hour=int(timeing)
+                        hour=hour+6 
+                        hour=str(hour)
+                      elif num==1:
+                        minit=timeing
+                      elif  num==2:
+                        second=timeing[:2]
+                    print("{acl}>>> {gcl}Date {acl}:{ycl} {time}".format(time=date+', '+hour+":"+minit+':'+second,acl=acl,ycl=ycl,gcl=gcl))  
+                if "<" in emailtext['from']:
+                  fromf_ck=emailtext['from']
+                  f_cky=fromf_ck.replace(" <"," • ")
+                  f_cky=f_cky.replace(">", "")
+                  if '"' in f_cky:
+                    f_cky=f_cky.replace('"','')
                   else:
-                    print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(ia["size"])+f"{bcl} BYTES\n")
-                  
+                    pass
+                else:
+                  f_cky=emailtext['from']
+                print("{acl}>>> {gcl}FROM {acl}:{ycl} {From}\n".format(From=f_cky,gcl=gcl,acl=acl,ycl=ycl))
+                
+                print("{acl}>>> {gcl}TO{acl} :{ycl} {To}".format(To=emailtext["to"],acl=acl,gcl=gcl,ycl=ycl))
+                if str(emailtext["cc"])== "None":
+                  pass
+                else:
+                  print("{acl}>>> {gcl}CC {acl}: {rcl}{cc}".format(cc=emailtext["cc"],acl=acl,gcl=gcl,rcl=rcl))
+                print("{acl}>>> {gcl}SUBJECT{acl} :{ycl} {subject}" .format(subject=emailtext["subject"],acl=acl,gcl=gcl,ycl=ycl))
+                print("\n{acl}>>> \033[1;0mBODY : {body}".format(body=emailtext["body_text"],acl=acl))
+                
+                if emailtext["attachments"] == []:
+                  pass
+                else:
+                  for num,ia in enumerate(emailtext["attachments"]):
+                    print("\n{acl}>>>{gcl} ATTACHMENT NO. {acl}:{ycl} {ia}\n".format(ia=num+1,acl=acl,gcl=gcl,ycl=ycl))
+                    print(f"{acl}>>>{gcl} VIEW ATTACHMENT {acl}:{ycl} https://api.internal.temp-mail.io/api/v3/attachment/"+(str(ia["id"]))+"?preview=1\n")
+                    print(f"{acl}>>>{gcl} DOWNLOAD ATTACHMENT{acl} :{ycl} https://api.internal.temp-mail.io/api/v3/attachment/"+(str(ia["id"]))+"?download=1\n")
+                    print(f"{acl}>>>{gcl} ATTACHMENT NAME {acl}:{ycl}"+(str(ia["name"]))+"\n")
+                    if 1048576<=int(ia["size"]):
+                      mathsize=str((int(ia["size"]))/1048576)
+                      sizeofia=mathsize[:4]
+                      print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(sizeofia)+f"{bcl} M.B.\n")
+                    elif 1048576>=int(ia["size"]) and 1024<=int(ia["size"]):
+                      mathsize=str((int(ia["size"]))/1024)
+                      sizeofia=mathsize[:4]
+                      print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(sizeofia)+f"{bcl} K.B.\n")
+                    
+                    else:
+                      print(f"{acl}>>>{gcl} ATTACHMENT SIZE {acl}:{ycl} "+str(ia["size"])+f"{bcl} BYTES\n")
+                      
+              else:
+                pass
     except Exception as mao:
       exit(mao)
     except  KeyboardInterrupt:
@@ -294,35 +303,42 @@ def more():
   {acl}[{gcl} 6{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
   {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT {acl}[{bcl} ×××{acl} ]
   """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
-  while True:
-    os.system("clear")
-    print(manuhome)
-    print(logo)
-    manuin=input(f"{acl}  ~~~>>>{ycl} ")
-    if manuin=="1":
-      randomemail()
-      break
-    elif manuin=="2":
-      coustomnewdomains()
-      break
-    elif manuin =="3":
-      seemail()
-      break
-    elif manuin =="4":
-      viewmail()
-      break
-    elif manuin=="5":
-      historylog()
-      break
-    elif manuin=="6":
-      maogit()
-      break
-    elif manuin=="0":
-      ext()
-      break
-    else:
-      print("[ ! ] INVALID SELECTION [ ! ]")
-      time.sleep(2)
+  try:
+    while True:
+      os.system("clear")
+      print(manuhome)
+      print(logo)
+      manuin=input(f"{acl}  ~~~>>>{ycl} ")
+      if manuin=="1":
+        randomemail()
+        break
+      elif manuin=="2":
+        coustomnewdomains()
+        break
+      elif manuin =="3":
+        seemail()
+        break
+      elif manuin =="4":
+        viewmail()
+        break
+      elif manuin=="5":
+        historylog()
+        break
+      elif manuin=="6":
+        maogit()
+        break
+      elif manuin=="0":
+        ext()
+        break
+      else:
+        print("[ ! ] INVALID SELECTION [ ! ]")
+        time.sleep(2)
+  except KeyboardInterrupt:
+    x_X=input(f"\n\n{ycl} BACK MAIN MANU OR TYPE {rcl}n{ycl} TO EXIT {acl}[{gcl}y{ncl}/{rcl}n{acl}] {acl}:{bcl} ")
+    if x_X=="y":
+      main2()
+    elif x_X=="n":
+      ext()      
 def more2():
   logo="""
   
@@ -335,90 +351,9 @@ def more2():
   {acl}[{gcl} 7{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
   {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT {acl}[{bcl} ×××{acl} ]
   """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
-  while True:
-    os.system("clear")
-    print(manuhome)
-    print(logo)
-    manuin=input(f"{acl}  ~~~>>>{ycl} ")
-    if manuin=="1":
-      randomemail()
-      break
-    elif manuin=="2":
-      coustomnewdomains()
-      break
-    elif manuin=="3":
-      inboxchkdef()
-      break
-    elif manuin =="4":
-      seemail()
-      break
-    elif manuin =="5":
-      viewmail()
-      break
-    elif manuin=="6":
-      historylog()
-      break
-    elif manuin=="7":
-      maogit()
-      break
-    elif manuin=="0":
-      ext()
-      break
-    else:
-      print("[ ! ] INVALID SELECTION [ ! ]")
-      time.sleep(2)      
-def main2():
-  logo="""
-  
-  {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
-  {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
-  {acl}[{gcl} 3{bcl}.{acl} ]{ycl} INBOX CHECK{acl} [{bcl} ALL MAILS {acl}]
-  {acl}[{gcl} 4{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
-  {acl}[{gcl} 5{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
-  {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
-  """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
-  while True:
+  try:
     
-    os.system("clear")
-    print(manuhome)
-    print(logo)
-    manuin=input(f"{acl}  ~~~>>>{ycl} ")
-    if manuin=="1":
-      randomemail()
-      break
-    elif manuin=="2":
-      coustomnewdomains()
-      break
-    elif manuin=="3":
-      inboxchkdef()
-      break
-    elif manuin=="4":
-      more2()
-      break
-    elif manuin =="5":
-      maogit()
-      break
-    elif manuin=="0":
-      ext()
-      break
-    else:
-      print("{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]".format(acl=acl,rcl=rcl))
-      time.sleep(2)
-      
-def main():
-  logo="""
-  
-  {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
-  {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
-  {acl}[{gcl} 3{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
-  {acl}[{gcl} 4{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
-  {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
-  """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
-  while True:
-    if filchk("core/domain.txt"):
-      inboxchkdef()
-      break
-    else:
+    while True:
       os.system("clear")
       print(manuhome)
       print(logo)
@@ -430,18 +365,120 @@ def main():
         coustomnewdomains()
         break
       elif manuin=="3":
-        more()
+        inboxchkdef()
         break
-      elif manuin=="4":
+      elif manuin =="4":
+        seemail()
+        break
+      elif manuin =="5":
+        viewmail()
+        break
+      elif manuin=="6":
+        historylog()
+        break
+      elif manuin=="7":
         maogit()
         break
       elif manuin=="0":
         ext()
+        break
+      else:
+        print("[ ! ] INVALID SELECTION [ ! ]")
+        time.sleep(2)   
+  except KeyboardInterrupt:
+    x_X=input(f"\n\n{ycl} BACK MAIN MANU OR TYPE {rcl}n{ycl} TO EXIT {acl}[{gcl}y{ncl}/{rcl}n{acl}] {acl}:{bcl} ")
+    if x_X=="y":
+      main2()
+    elif x_X=="n":
+      ext()      
+def main2():
+  try:
+    logo="""
+    
+    {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
+    {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
+    {acl}[{gcl} 3{bcl}.{acl} ]{ycl} INBOX CHECK{acl} [{bcl} ALL MAILS {acl}]
+    {acl}[{gcl} 4{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
+    {acl}[{gcl} 5{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
+    {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
+    """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
+    while True:
+      
+      os.system("clear")
+      print(manuhome)
+      print(logo)
+      manuin=input(f"{acl}  ~~~>>>{ycl} ")
+      if manuin=="1":
+        randomemail()
+        break
+      elif manuin=="2":
+        coustomnewdomains()
+        break
+      elif manuin=="3":
+        inboxchkdef()
+        break
+      elif manuin=="4":
+        more2()
+        break
+      elif manuin =="5":
+        maogit()
+        break
+      elif manuin=="0":
+        ext()
+        break
       else:
         print("{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]".format(acl=acl,rcl=rcl))
         time.sleep(2)
+  except KeyboardInterrupt:
+    x_X=input(f"\n\n{ycl} BACK MAIN MANU OR TYPE {rcl}n{ycl} TO EXIT {acl}[{gcl}y{ncl}/{rcl}n{acl}] {acl}:{bcl} ")
+    if x_X=="y":
+      main2()
+    elif x_X=="n":
+      ext()    
+def main():
+  try:
+    
+    logo="""
+    
+    {acl}[{gcl} 1{bcl}.{acl} ]{ycl} CREATE NEW MAIL{acl} [{ccl} RANDOM {acl}] 
+    {acl}[{gcl} 2{bcl}.{acl} ]{ycl} CREAT NEW MAIL{acl} [{bcl} CREAT YOUR SELF {acl}]
+    {acl}[{gcl} 3{bcl}.{acl} ]{ycl} MORE FEATURES {acl}[ {bcl}... {acl}]
+    {acl}[{gcl} 4{bcl}.{acl} ]{ycl} GITHUB {acl}[{bcl} MAO2116 {acl}]
+    {acl}[{rcl} 0{bcl}.{acl} ]{rcl} EXIT{acl} [{rcl} ××× {acl}]
+    """.format(acl=acl,bcl=bcl,gcl=gcl,ycl=ycl,rcl=rcl,ccl=ccl)
+    while True:
+      if filchk("core/domain.txt"):
+        inboxchkdef()
+        break
+      else:
+        os.system("clear")
+        print(manuhome)
+        print(logo)
+        manuin=input(f"{acl}  ~~~>>>{ycl} ")
+        if manuin=="1":
+          randomemail()
+          break
+        elif manuin=="2":
+          coustomnewdomains()
+          break
+        elif manuin=="3":
+          more()
+          break
+        elif manuin=="4":
+          maogit()
+          break
+        elif manuin=="0":
+          ext()
+        else:
+          print("{acl}[{rcl} !{acl} ]{rcl} INVALID SELECTION {acl}[{rcl} !{acl} ]".format(acl=acl,rcl=rcl))
+          time.sleep(2)
         
-        
+  except KeyboardInterrupt:
+    x_X=input(f"\n\n{ycl} BACK MAIN MANU OR TYPE {rcl}n{ycl} TO EXIT {acl}[{gcl}y{ncl}/{rcl}n{acl}] {acl}:{bcl} ")
+    if x_X=="y":
+      main2()
+    elif x_X=="n":
+      ext()
         
         
         
