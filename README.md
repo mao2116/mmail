@@ -1,5 +1,5 @@
 <h2 align="center"> MAO _ MAIL </h2>
-<h3>VERSION : 1.1 </h3>
+<h3>VERSION : 1.2 </h3>
 
 
 **A SIMPLE TOOL KIT FOR MAKE TEMPMAIL WITH TERMINAL.**
